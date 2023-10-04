@@ -6,15 +6,29 @@
 // for (var i = 0; i < drumButtonCount; i++) document.querySelectorAll("button")[i].addEventListener("click", handleClick);
 
 //! for...of
-for (var button of document.querySelectorAll(".drum")) button.addEventListener("click", handleClick);
+for (var button of document.querySelectorAll(".drum")) button.addEventListener("click", function () {
 
-document.addEventListener("keypress", handlePress);
+    var buttonInnerHTML = this.innerHTML;
+
+    handleClick(buttonInnerHTML);
+
+    buttonAnimation(buttonInnerHTML);
+});
+
+
+document.addEventListener("keypress", function (event) {
+
+    var pressInnerHTML = event.key;
+
+    handlePress(pressInnerHTML);
+
+    buttonAnimation(pressInnerHTML);
+
+});
 
 //————————————–––––––––––––––(Function)------------------------------
 
-function handleClick() {
-    var buttonInnerHTML = this.innerHTML;
-
+function handleClick(buttonInnerHTML) {
     switch (buttonInnerHTML) {
         case 'a':
             var tom1 = new Audio("sounds/tom-1.mp3");
@@ -59,8 +73,7 @@ function handleClick() {
 
 //————————————–––––––––––––––----------------------------------------
 
-function handlePress(event){
-    var pressInnerHTML = event.key;
+function handlePress(pressInnerHTML) {
 
     switch (pressInnerHTML) {
         case 'a':
@@ -106,3 +119,15 @@ function handlePress(event){
 }
 
 //————————————–––––––––––––––----------------------------------------
+
+function buttonAnimation(currnetKey) {
+
+    var activeButton = document.querySelector("." + currnetKey);
+
+    activeButton.classList.add("pressed");
+
+    setTimeout(function () {
+        activeButton.classList.remove("pressed");
+    }, 125);
+
+}
