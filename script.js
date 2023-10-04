@@ -22,7 +22,7 @@ document.addEventListener("keypress", function (event) {
 
     handlePress(pressInnerHTML);
 
-    buttonAnimation(pressInnerHTML);
+    if (['a', 's', 'd', 'f', 'j', 'k', 'l'].includes(event.key)) buttonAnimation(pressInnerHTML);
 
 });
 
